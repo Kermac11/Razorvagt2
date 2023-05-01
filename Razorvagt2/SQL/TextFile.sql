@@ -43,7 +43,7 @@ CREATE TABLE [dbo].[Preference] (
 CREATE TABLE [dbo].[Schedule] (
     [Schedule_ID] INT      IDENTITY (1, 1) NOT NULL,
     [Start_Date]  DATETIME NULL,
-    [End-Date]    DATETIME NULL,
+    [End_Date]    DATETIME NULL,
     CONSTRAINT [PK_Schedule] PRIMARY KEY CLUSTERED ([Schedule_ID] ASC)
 );
 
