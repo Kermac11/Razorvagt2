@@ -1,0 +1,28 @@
+﻿@page
+@model Razorvagt2.Pages.Users.GetAllUsersModel
+@{
+
+	@foreach (var item in Model.Users)
+	{
+		<tr>
+			<td>
+				@item.ID
+			</td>
+			<td>
+				@item.Name
+			</td>
+			<td>
+				@item.Username
+			</td>
+			<td>
+				@item.Phone
+			</td>
+			<td>
+				@item.EMail
+			</td>
+			<td>
+				@item.Admin
+			</td>
+		</tr>
+	}
+}

@@ -1,0 +1,23 @@
+﻿@page
+@model Razorvagt2.Pages.Assignments.GetAllAssignmentsModel
+@{
+}
+@foreach (var item in Model.Assigments){
+	<tr>
+		<td>
+			@item.ID
+		</td>
+		<td>
+			@item.AssignmentType
+		</td>
+		<td>
+			@item.Date
+		</td>
+		<td>
+			@item.Schedule
+		</td>
+		<td>
+			@item.User.Username
+		</td>
+	</tr>
+}
