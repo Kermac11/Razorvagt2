@@ -1,7 +1,7 @@
 ﻿@page
 @model Razorvagt2.Pages.Users.GetAllUsersModel
 @{
-
+	<table>
 	@foreach (var item in Model.Users)
 	{
 		<tr>
@@ -23,6 +23,8 @@
 			<td>
 				@item.Admin
 			</td>
+			<td><a asp-page="/Users/DeleteUser" asp-route-id="@item.ID">Delete</a></td>
 		</tr>
 	}
+	</table>
 }

@@ -5,7 +5,7 @@ namespace Razorvagt2.Pages.Users
 {
     public class DeleteUserModel : PageModel
     {
-        public void OnGet()
+        public void OnGet(int id)
         {
         }
     }

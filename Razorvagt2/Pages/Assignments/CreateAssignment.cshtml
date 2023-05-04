@@ -1,4 +1,35 @@
 ﻿@page
+@using Razorvagt2.Models
 @model Razorvagt2.Pages.Assignments.CreateAssignmentModel
 @{
 }
+<form method="post">
+	<div class="form-group">
+		<label asp-for="Assignment.Date" class="custom-control-label"></label>
+		<input asp-for="@Model.Assignment.Date" class="form-control" min="@Model.CurrentTime" type="datetime-local">
+		<span class="field-validation-error text-danger" asp-validation-for="Assignment.Date"></span>
+	</div>
+	<div class="form-group">
+		<label asp-for="Assignment.Length"></label>
+		<input value="00:00" type="time" asp-for="@Model.Assignment.Length">
+		<span class="field-validation-error text-danger" asp-validation-for="Assignment.Length"></span>
+	</div>
+	/*Area for Assignment types*/
+@*	<div class="form-group">
+	<select>
+		@foreach (string item in @Model.AssignementTypes)
+		{
+
+		}
+	</div>*@
+	<div class="form-group">
+		<label asp-for="Assignment.User" class="custom-control-label"></label>
+		<select name="user">
+			<option value="">Vælg en bruger</option>
+			@foreach (User item in @Model.UserList)
+			{
+				<option value="@item.ID">@item.Username</option>
+			}
+		</select>
+	</div>
+</form>

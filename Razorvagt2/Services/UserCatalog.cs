@@ -27,6 +27,7 @@ namespace Razorvagt2.Services
         public async Task<bool> CreateUser(User user)
         {
             //@Name, @UN, @PW, @PH, @ML, @AD
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using (SqlCommand command = new SqlCommand(insertUserSql, connection))
@@ -39,6 +40,7 @@ namespace Razorvagt2.Services
                         command.Parameters.AddWithValue("@PH", user.Phone);
                         command.Parameters.AddWithValue("@ML", user.EMail);
                         command.Parameters.AddWithValue("@AD", user.Admin);
+                        await command.Connection.OpenAsync();
                         int noOfRows = await command.ExecuteNonQueryAsync();
                         if (noOfRows == 1)
                         {
@@ -91,7 +93,6 @@ namespace Razorvagt2.Services
 
         public async Task<List<User>> GetAllUsers()
         {
-            User user = new User();
             List<User> result = new List<User>();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -103,6 +104,7 @@ namespace Razorvagt2.Services
                         SqlDataReader reader = await command.ExecuteReaderAsync();
                         while (await reader.ReadAsync())
                         {
+                            User user = new User();
                             user.ID = reader.GetInt32(i: 0);
                             user.Name = reader.GetString(i: 1);
                             user.Username = reader.GetString(i: 2);
