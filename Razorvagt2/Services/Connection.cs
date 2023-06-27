@@ -10,5 +10,10 @@
             Configuration = configuration;
             connectionString = Configuration["ConnectionStrings:DefaultConnection"];
         }
+        public Connection(string connectionString)
+        {
+            Configuration = null;
+            this.connectionString = connectionString;
+        }
     }
 }

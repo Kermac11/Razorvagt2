@@ -3,17 +3,19 @@ namespace Razorvagt2.Interfaces
 {
     public interface IAssignmentTypeCatalog
     {
-        Task<List<string>> GetAllTypes();
+        Task<List<Tag>> GetAllTypes();
 
         Task<string> GetTypeString(int id);
 
-        Task<bool> CreateAssignmentType(string type);
+        Task<Tag> GetTag(int id);
+
+        Task<bool> CreateAssignmentType(int id);
 
         Task<bool> CreateTag(Assignment assignment, string tag);
 
-        Task<bool> DeleteTag(int id);
+        Task<Tag> DeleteTag(int id);
 
-        Task<string> DeleteAssignmentType();
+        Task<string> DeleteAssignmentType(int id);
 
         Task<List<Assignment>> GetAssignmentsOfType(string type);
     }

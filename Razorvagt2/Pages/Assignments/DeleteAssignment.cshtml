@@ -3,17 +3,25 @@
 @{
 }
 <form method="post">
-	<input type="hidden" asp-for="@Model.Assignment.ID" name="id">
-	<div class="form-group">
-		<label asp-for="Assignment.ID"></label>
-		<h5>@Model.Assignment.ID</h5>
-	</div>
-	<div class="form-group">
-		<label asp-for="Assignment.Date"></label>
-		<h5>@Model.Assignment.Date</h5>
-	</div>
-	<div>
-		<label asp-for="Assignment.Length"></label>
-		<h5>@Model.Assignment.Length</h5>
-	</div>
+	<table>
+		<tr>
+			<input type="hidden" asp-for="@Model.Assignment.ID" name="id">
+			<td>
+				<label asp-for="Assignment.ID"></label>
+				<h5>@Model.Assignment.ID</h5>
+			</td>
+			<td>
+				<label asp-for="Assignment.Date"></label>
+				<h5>@Model.Assignment.Date</h5>
+			</td>
+			</div>
+			<td>
+				<label asp-for="Assignment.Length"></label>
+				<h5>@Model.Assignment.Length</h5>
+			</td>
+			<td>
+				<input type="submit" value="Delete" class="btn btn-primary" />
+			</td>
+		</tr>
+	</table>
 </form>

@@ -29,6 +29,11 @@ namespace Razorvagt2.Services
             this._userCatalog = userCatalog;
         }
 
+        public AssignmentCatalog(string connectionString, IUserCatalog userCatalog) : base(connectionString)
+        {
+            this._userCatalog = userCatalog;
+        }
+
         public async Task<bool> CreateAssignment(Assignment assignment)
         {
             //{//@UID, @Dt, @LT, @AT, @SID
@@ -38,11 +43,26 @@ namespace Razorvagt2.Services
                 {
                     try
                     {
-                        command.Parameters.AddWithValue("@UID", assignment.User.ID);
+                        if (assignment.User == null)
+                        {
+                            command.Parameters.AddWithValue("@UID", DBNull.Value);
+                        }
+                        else
+                        {
+                            command.Parameters.AddWithValue("@UID", assignment.User.ID);
+                        }
                         command.Parameters.AddWithValue("@Dt", assignment.Date);
-                        command.Parameters.AddWithValue("@LT", assignment.Length);
-                        command.Parameters.AddWithValue("@AT", assignment.AssignmentType);
-                        command.Parameters.AddWithValue("@SID", assignment.Schedule.ID);
+                        command.Parameters.AddWithValue("@LT", assignment.Length.Ticks);
+                        command.Parameters.AddWithValue("@AT", 1);
+                        if (assignment.Schedule == null)
+                        {
+                            command.Parameters.AddWithValue("@SID", DBNull.Value);
+                        }
+                        else
+                        {
+                            command.Parameters.AddWithValue("@SID", assignment.Schedule.ID);
+                        }
+                        await command.Connection.OpenAsync();
                         int noOfRows = await command.ExecuteNonQueryAsync();
                         if (noOfRows == 1)
                         {
@@ -85,14 +105,10 @@ namespace Razorvagt2.Services
             return assignment;
         }
 
-        public Task<Assignment> DeleteAssignment(int assignmentId, Assignment assignment)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<List<Assignment>> GetAllAssignments()
         {
-            Assignment assignment = new Assignment();
+
             List<Assignment> result = new List<Assignment>();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -104,6 +120,7 @@ namespace Razorvagt2.Services
                         SqlDataReader reader = await command.ExecuteReaderAsync();
                         while (await reader.ReadAsync())
                         {
+                            Assignment assignment = new Assignment();
                             assignment.ID = reader.GetInt32(i: 0);
                             if (!reader.IsDBNull(i: 1))
                             {
@@ -113,17 +130,19 @@ namespace Razorvagt2.Services
                             }
                             if (!reader.IsDBNull(i: 2))
                             {
-                                DateTime date = reader.GetDateTime(i: 2);
+                                assignment.Date = reader.GetDateTime(i: 2);
                             }
-                            if (reader.IsDBNull(i: 3))
+                            if (!reader.IsDBNull(i: 3))
                             {
-                                int length = reader.GetInt32(i: 3);
+                                long length = reader.GetInt64(i: 3);
+                                assignment.Length = TimeSpan.FromTicks(length);
                             }
-
+                            // AssigmentType Katalog needed
                             int assignmentType = reader.GetInt32(i: 4);
 
-                            if (reader.IsDBNull(i: 5))
+                            if (!reader.IsDBNull(i: 5))
                             {
+                                //schedulekatalog needed
                                 int scheduleId = reader.GetInt32(i: 5);
                             }
                             result.Add(assignment);
@@ -170,14 +189,15 @@ namespace Razorvagt2.Services
                             {
                                 DateTime date = reader.GetDateTime(i: 2);
                             }
-                            if (reader.IsDBNull(i: 3))
+                            if (!reader.IsDBNull(i: 3))
                             {
-                                int length = reader.GetInt32(i: 3);
+                                long length = reader.GetInt64(i: 3);
+                                assignment.Length = TimeSpan.FromTicks(length);
                             }
 
                             int assignmentType = reader.GetInt32(i: 4);
 
-                            if (reader.IsDBNull(i: 5))
+                            if (!reader.IsDBNull(i: 5))
                             {
                                 int scheduleId = reader.GetInt32(i: 5);
                             }
@@ -224,14 +244,15 @@ namespace Razorvagt2.Services
                             {
                                 DateTime date = reader.GetDateTime(i: 2);
                             }
-                            if (reader.IsDBNull(i: 3))
+                            if (!reader.IsDBNull(i: 3))
                             {
-                                int length = reader.GetInt32(i: 3);
+                                long length = reader.GetInt64(i: 3);
+                                assignment.Length = TimeSpan.FromTicks(length);
                             }
 
                             int assignmentType = reader.GetInt32(i: 4);
 
-                            if (reader.IsDBNull(i: 5))
+                            if (!reader.IsDBNull(i: 5))
                             {
                                 int scheduleId = reader.GetInt32(i: 5);
                             }

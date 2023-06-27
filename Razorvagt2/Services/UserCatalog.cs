@@ -15,7 +15,10 @@ namespace Razorvagt2.Services
         public UserCatalog(IConfiguration configuration) : base(configuration)
         {
         }
+        public UserCatalog(string connectionString) : base(connectionString)
+        {
 
+        }
         /*  [User_ID]  INT          IDENTITY (1, 1) NOT NULL,
             [Name]     VARCHAR (50) NOT NULL,
             [Username] VARCHAR (50) NOT NULL,
@@ -143,43 +146,50 @@ namespace Razorvagt2.Services
             [Email]    VARCHAR (50) NOT NULL,
             [Admin]    BIT          NOT NULL,
             PRIMARY KEY CLUSTERED ([User_ID] ASC) */
-            User user = new User();
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            if (ID != 0)
             {
-                using (SqlCommand command = new SqlCommand(GetUserFromIDSql, connection))
+                User user = new User();
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    try
+                    using (SqlCommand command = new SqlCommand(GetUserFromIDSql, connection))
                     {
-                        command.Parameters.AddWithValue("@ID", ID);
-                        await command.Connection.OpenAsync();
-                        SqlDataReader reader = await command.ExecuteReaderAsync();
-                        while (await reader.ReadAsync())
+                        try
                         {
-                            user.ID = reader.GetInt32(i: 0);
-                            user.Name = reader.GetString(i: 1);
-                            user.Username = reader.GetString(i: 2);
-                            user.Password = reader.GetString(i: 3);
-                            if (!reader.IsDBNull(i: 4))
+                            command.Parameters.AddWithValue("@ID", ID);
+                            await command.Connection.OpenAsync();
+                            SqlDataReader reader = await command.ExecuteReaderAsync();
+                            while (await reader.ReadAsync())
                             {
-                                user.Phone = reader.GetString(i: 4);
+                                user.ID = reader.GetInt32(i: 0);
+                                user.Name = reader.GetString(i: 1);
+                                user.Username = reader.GetString(i: 2);
+                                user.Password = reader.GetString(i: 3);
+                                if (!reader.IsDBNull(i: 4))
+                                {
+                                    user.Phone = reader.GetString(i: 4);
+                                }
+                                user.EMail = reader.GetString(i: 5);
+                                user.Admin = reader.GetBoolean(i: 6);
                             }
-                            user.EMail = reader.GetString(i: 5);
-                            user.Admin = reader.GetBoolean(i: 6);
+                        }
+                        catch (SqlException sx)
+                        {
+                            Console.WriteLine("Database Fejl");
+                            return null;
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Generel Fejl");
+                            return null;
                         }
                     }
-                    catch (SqlException sx)
-                    {
-                        Console.WriteLine("Database Fejl");
-                        return null;
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("Generel Fejl");
-                        return null;
-                    }
                 }
+                return user;
             }
-            return user;
+            else
+            {
+                return null;
+            }
         }
 
         public async Task<bool> UpdateUser(int userid, User user)

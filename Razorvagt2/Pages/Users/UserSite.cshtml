@@ -2,3 +2,20 @@
 @model Razorvagt2.Pages.Users.UserSiteModel
 @{
 }
+<h3>Log-in</h3>
+
+<form method="post">
+	<div class="form-group">
+		<label asp-for="@Model.User.Username" class="control-label"></label>
+		<input asp-for="@Model.User.Username" class="control-label" />
+		<span asp-validation-for="@Model.User.Username" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label asp-for="@Model.User.Password"></label>
+		<input asp-for="@Model.User.Password" />
+		<span asp-validation-for="@Model.User.Password" class="text-danger"></span>
+	  <div class="form-group">
+        <input type="submit" value="Log in" class="btn button btn-dark" />
+    </div>
+	</div>
+</form>

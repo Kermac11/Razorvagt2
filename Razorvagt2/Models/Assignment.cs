@@ -6,7 +6,7 @@
         private User _user;
         private int _assigmentId;
         private DateTime _date;
-        private int _length;
+        private TimeSpan _length;
         private string _assignmenType;
         private Schedule _schedule;
 
@@ -14,7 +14,7 @@
         {
 
         }
-        public Assignment( int id, User user, DateTime date, int length, string assignmentType, Schedule schedule)
+        public Assignment( int id, User user, DateTime date, TimeSpan length, string assignmentType, Schedule schedule)
         {
             _user = user;
             _assigmentId = id;
@@ -37,7 +37,7 @@
             set { _date = value; }
         }
         
-        public int Length
+        public TimeSpan Length
         {
             get { return _length; }
             set { _length = value; }

@@ -7,8 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddTransient<IUserCatalog, UserCatalog>();
 builder.Services.AddTransient<IAssignmentCatalog, AssignmentCatalog>();
-builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddSession();
+builder.Services.AddMemoryCache();
+builder.Services.AddMvc();
 
 var app = builder.Build();
 
@@ -21,7 +23,10 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
+
+app.UseSession();
 
 app.UseRouting();
 

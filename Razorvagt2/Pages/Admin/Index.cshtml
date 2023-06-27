@@ -1,0 +1,18 @@
+﻿@page
+@model Razorvagt2.Pages.Admin.IndexModel
+@{
+}
+<form>
+    <div class="form-group">
+      <button asp-area="" asp-page="/Assignments/CreateAssignment" class="alert-info" style="padding: 14px 28px; width: 33.3%; float: left">Create Assignment</button>
+    </div>
+    <div class="form-group">
+        <button asp-page="/Users/CreateUser" class="alert-info" style="padding: 14px 28px; width: 33.3%; float: left">Create User</button>
+    </div>
+    <div class="form-group">
+        <button asp-area="" asp-page="/Assignments/GetAllAssignments" class="alert-info" style="padding: 14px 28px; width: 33.3%; float: left">All Assignment</button>
+    </div>
+    <div class="form-group">
+        <button asp-area="" asp-page="/Users/GetAllUsers" class="alert-info" style="padding: 14px 28px; width: 33.3%; float: left">All Users</button>
+    </div>
+</form>

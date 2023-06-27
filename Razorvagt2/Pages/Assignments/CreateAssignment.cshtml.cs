@@ -29,14 +29,15 @@ namespace Razorvagt2.Pages.Assignments
         {
             CurrentTime = DateTime.Now.ToString("dd-MM-yyyyT00:00");
         }
-        
+
         public IActionResult OnPost(int user)
         {
             Assignment place = new Assignment();
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            Assignment.User = _userCatalog.GetUserFromID(user).Result;
+            //if (!ModelState.IsValid)
+            //{
+            //    return Page();
+            //}
             lock (_lock)
             {
                 _aCatalog.CreateAssignment(Assignment);
@@ -45,7 +46,7 @@ namespace Razorvagt2.Pages.Assignments
             }
             //Place for Assignement types
 
-            return RedirectToPage("GetAllAssignment");
+            return RedirectToPage("GetAllAssignments");
 
 
         }

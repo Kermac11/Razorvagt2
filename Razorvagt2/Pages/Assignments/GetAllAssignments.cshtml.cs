@@ -11,6 +11,7 @@ namespace Razorvagt2.Pages.Assignments
         public GetAllAssignmentsModel(IAssignmentCatalog assignmentsCatalog)
         {
             _catalog = assignmentsCatalog;
+           
         }
 
         private List<Assignment> _assignmentList;

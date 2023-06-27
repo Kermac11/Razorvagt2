@@ -2,22 +2,29 @@
 @model Razorvagt2.Pages.Assignments.GetAllAssignmentsModel
 @{
 }
-@foreach (var item in Model.Assigments){
-	<tr>
-		<td>
-			@item.ID
-		</td>
-		<td>
-			@item.AssignmentType
-		</td>
-		<td>
-			@item.Date
-		</td>
-		<td>
-			@item.Schedule
-		</td>
-		<td>
-			@item.User.Username
-		</td>
-	</tr>
-}
+<table>
+	@foreach (var item in Model.Assigments)
+	{
+		<tr>
+			<td>
+				@item.ID
+			</td>
+			<td>
+				@item.AssignmentType
+			</td>
+			<td>
+				@item.Date
+			</td>
+			<td>
+				@item.Schedule
+			</td>
+			@if (item.User != null)
+			{
+				<td>
+					@item.User.Username
+				</td>
+			}
+			<td><a asp-page="/Assignments/DeleteAssignment" asp-route-id="@item.ID">Delete</a></td>
+		</tr>
+	}
+</table>

@@ -2,3 +2,234 @@
 @model Razorvagt2.Pages.Schedule.SchedulePageModel
 @{
 }
+<div class="container">
+	<div class="row">
+		<div class="column">
+			<table>
+
+				<th>Monday</th>
+				@foreach (var item in Model.ScheduleAssignments.FindAll(a => a.Date.DayOfWeek == DayOfWeek.Monday))
+				{
+					<tr>
+						<td>
+							@item.ID
+						</td>
+						<td>
+							@item.AssignmentType
+						</td>
+						<td>
+							@item.Date
+						</td>
+						<td>
+							@item.Date.DayOfWeek
+						</td>
+						<td>
+							@item.Schedule
+						</td>
+						@if (item.User != null)
+						{
+							<td>
+								@item.User.Username
+							</td>
+						}
+						<td><a asp-page="/Assignments/DeleteAssignment" asp-route-id="@item.ID">Delete</a></td>
+					</tr>
+				}
+			</table>
+		</div>
+		<div class="column">
+			<table>
+
+				<th>Tuesday</th>
+				@foreach (var item in Model.ScheduleAssignments.FindAll(a => a.Date.DayOfWeek == DayOfWeek.Tuesday))
+				{
+					<tr>
+						<td>
+							@item.ID
+						</td>
+						<td>
+							@item.AssignmentType
+						</td>
+						<td>
+							@item.Date
+						</td>
+						<td>
+							@item.Date.DayOfWeek
+						</td>
+						<td>
+							@item.Schedule
+						</td>
+						@if (item.User != null)
+						{
+							<td>
+								@item.User.Username
+							</td>
+						}
+						<td><a asp-page="/Assignments/DeleteAssignment" asp-route-id="@item.ID">Delete</a></td>
+					</tr>
+				}
+			</table>
+		</div>
+		<div class="column">
+			<table>
+
+				<th>Wednesday</th>
+				@foreach (var item in Model.ScheduleAssignments.FindAll(a => a.Date.DayOfWeek == DayOfWeek.Wednesday))
+				{
+					<tr>
+						<td>
+							@item.ID
+						</td>
+						<td>
+							@item.AssignmentType
+						</td>
+						<td>
+							@item.Date
+						</td>
+						<td>
+							@item.Date.DayOfWeek
+						</td>
+						<td>
+							@item.Schedule
+						</td>
+						@if (item.User != null)
+						{
+							<td>
+								@item.User.Username
+							</td>
+						}
+						<td><a asp-page="/Assignments/DeleteAssignment" asp-route-id="@item.ID">Delete</a></td>
+					</tr>
+				}
+			</table>
+		</div>
+		<div class="column">
+			<table>
+				<th>Thursday</th>
+				@foreach (var item in Model.ScheduleAssignments.FindAll(a => a.Date.DayOfWeek == DayOfWeek.Thursday))
+				{
+					<tr>
+						<td>
+							@item.ID
+						</td>
+						<td>
+							@item.AssignmentType
+						</td>
+						<td>
+							@item.Date
+						</td>
+						<td>
+							@item.Date.DayOfWeek
+						</td>
+						<td>
+							@item.Schedule
+						</td>
+						@if (item.User != null)
+						{
+							<td>
+								@item.User.Username
+							</td>
+						}
+						<td><a asp-page="/Assignments/DeleteAssignment" asp-route-id="@item.ID">Delete</a></td>
+					</tr>
+				}
+			</table>
+		</div>
+		<div class="column">
+			<table>
+				<th>Friday</th>
+				@foreach (var item in Model.ScheduleAssignments.FindAll(a => a.Date.DayOfWeek == DayOfWeek.Friday))
+				{
+					<tr>
+						<td>
+							@item.ID
+						</td>
+						<td>
+							@item.AssignmentType
+						</td>
+						<td>
+							@item.Date
+						</td>
+						<td>
+							@item.Date.DayOfWeek
+						</td>
+						<td>
+							@item.Schedule
+						</td>
+						@if (item.User != null)
+						{
+							<td>
+								@item.User.Username
+							</td>
+						}
+						<td><a asp-page="/Assignments/DeleteAssignment" asp-route-id="@item.ID">Delete</a></td>
+					</tr>
+				}
+			</table>
+		</div>
+		<div class="column">
+			<table>
+				<th>Saturday</th>
+				@foreach (var item in Model.ScheduleAssignments.FindAll(a => a.Date.DayOfWeek == DayOfWeek.Saturday))
+				{
+					<tr>
+						<td>
+							@item.ID
+						</td>
+						<td>
+							@item.AssignmentType
+						</td>
+						<td>
+							@item.Date
+						</td>
+						<td>
+							@item.Date.DayOfWeek
+						</td>
+						<td>
+							@item.Schedule
+						</td>
+						@if (item.User != null)
+						{
+							<td>
+								@item.User.Username
+							</td>
+						}
+						<td><a asp-page="/Assignments/DeleteAssignment" asp-route-id="@item.ID">Delete</a></td>
+					</tr>
+				}
+			</table>
+		</div>
+		<div class="column">
+			<table>
+				<th>Sunday</th>
+				@foreach (var item in Model.ScheduleAssignments.FindAll(a => a.Date.DayOfWeek == DayOfWeek.Sunday))
+				{
+					<tr>
+						<td>
+							@item.ID
+						</td>
+						<td>
+							@item.AssignmentType
+						</td>
+						<td>
+							@item.Date
+						</td>
+						<td>
+							@item.Date.DayOfWeek
+						</td>
+						<td>
+							@item.Schedule
+						</td>
+						@if (item.User != null)
+						{
+							<td>
+								@item.User.Username
+							</td>
+						}
+						<td><a asp-page="/Assignments/DeleteAssignment" asp-route-id="@item.ID">Delete</a></td>
+					</tr>
+				}
+			</table>
+		</div>
+	</div>
+</div>
